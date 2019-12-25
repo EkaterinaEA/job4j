@@ -17,4 +17,22 @@ class SquareTest {
         assertThat(rst, is(expect));
     }
 
+    @Test
+    public void whenBound7() {
+        int bound = 7;
+        Square square = new Square();
+        int[] rst = square.calculate(bound);
+        int[] expect = new int[] {1, 4, 9, 16, 25, 36, 49};
+        assertThat(rst, is(expect));
+    }
+
+    @Test
+    public void whenBound1Then1() {
+        int bound = 1;
+        Square square = new Square();
+        int[] rst = square.calculate(bound);
+        int[] expect = new int[] {1};
+        assertThat(rst, is(expect));
+    }
+
 }

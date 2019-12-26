@@ -12,4 +12,36 @@ public class Matrix {
         return table;
     }
 
+    public static boolean isWin(char[][] board) {
+        boolean result = false;
+        for (int i=0; i<board.length; i++) {
+            if (board[i][i] == 'X' && (monoHorizontal(board, i) || monoVertical(board, i))){
+                result = true;
+                break;
+            }
+
+        }
+        return result;
+    }
+
+     static boolean monoHorizontal(char[][] board, int index){
+        boolean result = true;
+        for (int i=0; i<board.length; i++){
+            if (board[i][index] != 'X'){
+                result = false;
+            }
+        }
+        return result;
+    }
+
+     static boolean monoVertical(char[][] board, int index){
+        boolean result = true;
+        for (int i=0; i<board.length; i++){
+            if (board[index][i] != 'X'){
+                result = false;
+            }
+        }
+        return result;
+    }
+
 }

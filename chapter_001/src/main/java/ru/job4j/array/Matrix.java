@@ -29,6 +29,7 @@ public class Matrix {
         for (int i = 0; i < board.length; i++) {
             if (board[i][index] != 'X') {
                 result = false;
+                break;
             }
         }
         return result;
@@ -39,6 +40,7 @@ public class Matrix {
         for (int i = 0; i < board.length; i++) {
             if (board[index][i] != 'X') {
                 result = false;
+                break;
             }
         }
         return result;

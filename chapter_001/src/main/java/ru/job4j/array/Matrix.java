@@ -19,12 +19,11 @@ public class Matrix {
                 result = true;
                 break;
             }
-
         }
         return result;
     }
 
-     static boolean monoHorizontal(char[][] board, int index) {
+    static boolean monoHorizontal(char[][] board, int index) {
         boolean result = true;
         for (int i = 0; i < board.length; i++) {
             if (board[i][index] != 'X') {
@@ -35,7 +34,7 @@ public class Matrix {
         return result;
     }
 
-     static boolean monoVertical(char[][] board, int index) {
+    static boolean monoVertical(char[][] board, int index) {
         boolean result = true;
         for (int i = 0; i < board.length; i++) {
             if (board[index][i] != 'X') {
@@ -45,5 +44,4 @@ public class Matrix {
         }
         return result;
     }
-
 }

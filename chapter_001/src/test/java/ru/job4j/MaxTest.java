@@ -20,8 +20,45 @@ class MaxTest {
     }
 
     @Test
-    public void whenElemEquals() {
+    public void when2ElemEquals() {
         int result = Max.max(2, 2);
         assertThat(result, is(2));
     }
+
+    @Test
+    public void when3ElemFirstMax() {
+        int result = Max.max(3, 2, 0);
+        assertThat(result, is(3));
+    }
+
+    @Test
+    public void when3ElemThirdMax() {
+        int result = Max.max(-30, 2, 10);
+        assertThat(result, is(10));
+    }
+
+    @Test
+    public void when3ElemEquals() {
+        int result = Max.max(30, 30, 30);
+        assertThat(result, is(30));
+    }
+
+    @Test
+    public void when4ElemFirstMax() {
+        int result = Max.max(3, 2, 0, 1);
+        assertThat(result, is(3));
+    }
+
+    @Test
+    public void when4ElemThirdMax() {
+        int result = Max.max(-30, 2, 10, 0);
+        assertThat(result, is(10));
+    }
+
+    @Test
+    public void when4ElemEquals() {
+        int result = Max.max(30, 30, 30, 30);
+        assertThat(result, is(30));
+    }
+
 }

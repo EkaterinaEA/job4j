@@ -13,4 +13,13 @@ public class PointTest {
         double out = a.distance(b);
         Assert.assertEquals(expected, out, 0.01);
     }
+
+    @Test
+    public void distanceTree() {
+        double expected = 3;
+        Point a = new Point(1, 2, 1);
+        Point b = new Point(3, 4, 0);
+        double out = a.distance(b);
+        Assert.assertEquals(expected, out, 0.01);
+    }
 }

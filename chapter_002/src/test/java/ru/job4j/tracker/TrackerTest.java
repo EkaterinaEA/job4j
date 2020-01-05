@@ -1,0 +1,49 @@
+package ru.job4j.tracker;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
+class TrackerTest {
+
+    @Test
+    void tracker() {
+
+        Item item = new Item("name");
+        Item item1 = null;
+        Item item2 = new Item("name2");
+        Item item3 = new Item("name2");
+        Tracker tracker = new Tracker();
+        tracker.add(item);
+        tracker.add(item1);
+        tracker.add(item2);
+        tracker.add(item3);
+
+        Item resultFindById1 = tracker.findById(item.getId());
+        Item resultFindById2 = tracker.findById(item2.getId());
+
+        assertThat(resultFindById1.getName(), is(item.getName()));
+        assertThat(resultFindById2.getName(), is(item2.getName()));
+
+        List<Item> resultFindByName1 = tracker.findByName(item.getName());
+        List<Item> resultFindByIdName2 = tracker.findByName(item2.getName());
+
+        assertThat(resultFindByName1.get(0).getName(), is(item.getName()));
+        assertThat(resultFindByName1.get(0).getId(), is(item.getId()));
+        assertThat(resultFindByIdName2.get(0).getName(), is(item2.getName()));
+        assertThat(resultFindByIdName2.get(0).getId(), is(item2.getId()));
+        assertThat(resultFindByIdName2.get(1).getName(), is(item2.getName()));
+        assertThat(resultFindByIdName2.get(1).getName(), is(item3.getName()));
+        assertThat(resultFindByIdName2.get(1).getId(), is(item3.getId()));
+
+        Item[] resultList = tracker.findAll();
+
+        assertThat(resultList[0].getName(), is(item.getName()));
+        assertThat(resultList[1].getName(), is(item2.getName()));
+
+    }
+
+}

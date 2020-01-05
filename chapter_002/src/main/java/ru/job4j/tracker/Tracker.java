@@ -53,13 +53,13 @@ public class Tracker {
         return itemsFindByName;
     }
 
-    public Item findById(String id){
-        for (Item item : items) {
-            if (item != null && item.getId().equals(id)){
-                return item;
-            }
-        }
-        return null;
+    public Item findById(String id) {
+        return items[indexOf(id)];
+    }
+
+    public void replace(String id, Item item) {
+        int index = indexOf(id);
+        findById(id).setName(item.getName());
     }
 
     /**
@@ -72,16 +72,14 @@ public class Tracker {
         return String.valueOf(rm.nextLong() + System.currentTimeMillis());
     }
 
-    public static void main(String[] args) {
-        Item item = new Item("name");
-        Item item1 = null;
-        Item item2 = new Item("name2");
-        Tracker tracker = new Tracker();
-        tracker.add(item);
-        tracker.add(item1);
-        tracker.add(item2);
-        tracker.findAll();
-        System.out.println(tracker.findById(tracker.findAll()[0].getId()).getName());
-        System.out.println(tracker.findByName("name").get(0).getName());
+    private int indexOf(String id) {
+        int rsl = -1;
+        for (int index = 0; index < position; index++) {
+            if (items[index].getId().equals(id)) {
+                rsl = index;
+                break;
+            }
+        }
+        return rsl;
     }
 }

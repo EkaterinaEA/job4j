@@ -54,13 +54,26 @@ public class Tracker {
     }
 
     public Item findById(String id) {
-        return items[indexOf(id)];
+        if (indexOf(id) == -1){
+            return null;
+        } else {
+            return items[indexOf(id)];
+        }
     }
 
     public void replace(String id, Item item) {
         int index = indexOf(id);
         findById(id).setName(item.getName());
     }
+
+    public void delete(String id) {
+        int index = indexOf(id);
+        items[indexOf(id)] = null;
+        System.arraycopy(items, index + 1, items, index, position - index);
+        items[position] = null;
+        position--;
+    }
+
 
     /**
      * Метод генерирует уникальный ключ для заявки.

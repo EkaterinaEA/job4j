@@ -24,8 +24,8 @@ public class Tracker {
     public Item add(Item item) {
         if (item != null){
             item.setId(this.generateId());
+            this.items[this.position++] = item;
         }
-        this.items[this.position++] = item;
         return item;
     }
 
@@ -38,8 +38,7 @@ public class Tracker {
         int size = 0;
         for (int index = 0; index < position; index++) {
                 if (items[index] != null && items[index].getName().equals(key)) {
-                    itemsFindByName[size] = items[index];
-                    size++;
+                    itemsFindByName[size++] = items[index];
                 }
             }
         return Arrays.copyOf(itemsFindByName, size);
@@ -47,7 +46,7 @@ public class Tracker {
 
     public Item findById(String id) {
         int index = indexOf(id);
-        if (index != -1){
+        if (index == -1){
             return null;
         } else {
             return items[index];

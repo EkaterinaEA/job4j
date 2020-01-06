@@ -44,6 +44,7 @@ class TrackerTest {
 
         assertThat(resultList[0].getName(), is(item.getName()));
         assertThat(resultList[1].getName(), is(item2.getName()));
+        assertThat(resultList[2].getName(), is(item3.getName()));
 
     }
 

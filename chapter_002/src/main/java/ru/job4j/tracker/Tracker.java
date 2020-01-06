@@ -29,28 +29,31 @@ public class Tracker {
         return item;
     }
 
-    public Item[] findAll(){
-        Item[] itemsWithoutNull = new Item[items.length];
+    public Item[] findAll() {
         int size = 0;
-        for (int index = 0; index < items.length; index++) {
-            Item temp = items[index];
-            if (temp != null) {
-                itemsWithoutNull[size] = temp;
-                size++;
+        if (items != null) {
+            for (Item item : items) {
+                if (item != null) {
+                    items[size] = item;
+                    size++;
+                }
             }
         }
-        itemsWithoutNull = Arrays.copyOf(itemsWithoutNull, size);
-        return itemsWithoutNull;
+        return Arrays.copyOf(items, size);
     }
 
-    public ArrayList<Item> findByName(String key){
-        ArrayList<Item> itemsFindByName = new ArrayList<Item>();
-        for (Item item : items) {
-            if (item != null && item.getName().equals(key)){
-                itemsFindByName.add(item);
+    public Item[] findByName(String key) {
+        Item[] itemsFindByName = new Item[items.length];
+        int size = 0;
+        if (items != null) {
+            for (Item item : items) {
+                if (item != null && item.getName().equals(key)) {
+                    itemsFindByName[size] = item;
+                    size++;
+                }
             }
         }
-        return itemsFindByName;
+        return Arrays.copyOf(itemsFindByName, size);
     }
 
     public Item findById(String id) {
@@ -88,7 +91,7 @@ public class Tracker {
     private int indexOf(String id) {
         int rsl = -1;
         for (int index = 0; index < position; index++) {
-            if (items[index].getId().equals(id)) {
+            if (items[index] != null && items[index].getId().equals(id)) {
                 rsl = index;
                 break;
             }

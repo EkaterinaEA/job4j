@@ -29,16 +29,16 @@ class TrackerTest {
         assertThat(resultFindById1.getName(), is(item.getName()));
         assertThat(resultFindById2.getName(), is(item2.getName()));
 
-        List<Item> resultFindByName1 = tracker.findByName(item.getName());
-        List<Item> resultFindByIdName2 = tracker.findByName(item2.getName());
+        Item[] resultFindByName1 = tracker.findByName(item.getName());
+        Item[] resultFindByName2 = tracker.findByName(item2.getName());
 
-        assertThat(resultFindByName1.get(0).getName(), is(item.getName()));
-        assertThat(resultFindByName1.get(0).getId(), is(item.getId()));
-        assertThat(resultFindByIdName2.get(0).getName(), is(item2.getName()));
-        assertThat(resultFindByIdName2.get(0).getId(), is(item2.getId()));
-        assertThat(resultFindByIdName2.get(1).getName(), is(item2.getName()));
-        assertThat(resultFindByIdName2.get(1).getName(), is(item3.getName()));
-        assertThat(resultFindByIdName2.get(1).getId(), is(item3.getId()));
+        assertThat(resultFindByName1[0].getName(), is(item.getName()));
+        assertThat(resultFindByName1[0].getId(), is(item.getId()));
+        assertThat(resultFindByName2[0].getName(), is(item2.getName()));
+        assertThat(resultFindByName2[0].getId(), is(item2.getId()));
+        assertThat(resultFindByName2[1].getName(), is(item2.getName()));
+        assertThat(resultFindByName2[1].getName(), is(item3.getName()));
+        assertThat(resultFindByName2[1].getId(), is(item3.getId()));
 
         Item[] resultList = tracker.findAll();
 

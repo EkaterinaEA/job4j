@@ -57,10 +57,11 @@ public class Tracker {
     }
 
     public Item findById(String id) {
-        if (indexOf(id) == -1){
+        int index = indexOf(id);
+        if (index != -1){
             return null;
         } else {
-            return items[indexOf(id)];
+            return items[index];
         }
     }
 

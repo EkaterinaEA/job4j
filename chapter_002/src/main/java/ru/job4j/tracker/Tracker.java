@@ -66,7 +66,8 @@ public class Tracker {
 
     public void replace(String id, Item item) {
         int index = indexOf(id);
-        findById(id).setName(item.getName());
+        items[index] = item;
+        items[index].setId(id);
     }
 
     public void delete(String id) {

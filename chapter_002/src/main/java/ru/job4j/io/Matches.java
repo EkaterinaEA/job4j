@@ -18,7 +18,7 @@ public class Matches {
                 System.out.println("Введённое число не соответствует диапазону от 1 до 3\n");
                 continue;
             } else if (matches - select <= 0) {
-                if (user == true) {
+                if (user) {
                     System.out.println("Победил первый игрок!");
                 } else {
                     System.out.println("Победил второй игрок!");

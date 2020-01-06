@@ -64,19 +64,36 @@ public class Tracker {
         }
     }
 
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
         int index = indexOf(id);
-        items[index] = item;
-        items[index].setId(id);
+        if (index != -1) {
+            items[index] = item;
+            items[index].setId(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void delete(String id) {
+    public boolean delete(String id) {
         int index = indexOf(id);
-        items[indexOf(id)] = null;
-        System.arraycopy(items, index + 1, items, index, position - index);
-        items[position] = null;
-        position--;
+        if (index != -1) {
+            items[indexOf(id)] = null;
+            System.arraycopy(items, index + 1, items, index, position - index);
+            items[position] = null;
+            position--;
+            return true;
+        } else {
+            return false;
+        }
     }
+
+    //это должно отрабатывать в случае если итем есть в трекере
+    //
+    //добавьте проверку на -1
+    //
+    //и можете сделать методы замены и удаления
+    // boolean  тогда дальше будет проще строить вывод пользователю в зависимости от успешности операции
 
 
     /**

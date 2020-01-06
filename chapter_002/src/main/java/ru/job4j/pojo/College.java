@@ -9,8 +9,8 @@ public class College {
         student.setFullName("Ivanov Ivan Ivanovich");
         student.setEntryDate(new Date());
         student.setGroup(505);
-        System.out.println("Student info. \nFull name: " + student.getFullName() +
-                "\nEntry date: " + student.getEntryDate() + "\nGroup: " + student.getGroup());
+        System.out.println("Student info. \nFull name: " + student.getFullName()
+                + "\nEntry date: " + student.getEntryDate() + "\nGroup: " + student.getGroup());
     }
 
 }

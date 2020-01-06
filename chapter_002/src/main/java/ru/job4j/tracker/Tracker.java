@@ -22,7 +22,7 @@ public class Tracker {
      * @param item новая заявка
      */
     public Item add(Item item) {
-        if (item != null){
+        if (item != null) {
             item.setId(this.generateId());
             this.items[this.position++] = item;
         }
@@ -50,7 +50,7 @@ public class Tracker {
 
     public Item findById(String id) {
         int index = indexOf(id);
-        if (index == -1){
+        if (index == -1) {
             return null;
         } else {
             return items[index];

@@ -18,7 +18,9 @@ public class MagicBall {
             return "Да";
         } else if (answer == 1) {
             return "Нет";
-        } else return "Может быть";
+        } else {
+            return "Может быть";
+        }
     }
 
 }

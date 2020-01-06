@@ -4,7 +4,7 @@ public class Surgeon extends Doctor {
 
     private Surgery surgery;
 
-    public void doSurgery(Surgery surgery){
+    public void doSurgery(Surgery surgery) {
     }
 
 }

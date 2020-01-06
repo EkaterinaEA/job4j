@@ -51,7 +51,9 @@ public class StartUI {
         Item foundById = tracker.findById(findId);
         if (foundById != null) {
             System.out.println("Item ID: " + foundById.getId() + ", Item name: " + foundById.getName());
-        } else System.out.println("Not found");
+        } else {
+            System.out.println("Not found");
+        }
     }
 
     public static void findByName(Input input, Tracker tracker) {
@@ -62,7 +64,9 @@ public class StartUI {
             for (Item found : foundByName) {
                 System.out.println("Item ID: " + found.getId() + ", Item name: " + found.getName());
             }
-        } else System.out.println("Not found");
+        } else {
+            System.out.println("Not found");
+        }
     }
 
     public void init(Input input, Tracker tracker) {
@@ -92,6 +96,10 @@ public class StartUI {
                 case (6):
                     System.out.println("=== Exit Program ====");
                     run = false;
+                    break;
+                default:
+                    run = false;
+                    break;
             }
         }
     }

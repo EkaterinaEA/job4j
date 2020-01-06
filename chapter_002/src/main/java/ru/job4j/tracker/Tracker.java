@@ -41,7 +41,11 @@ public class Tracker {
                     itemsFindByName[size++] = items[index];
                 }
             }
-        return Arrays.copyOf(itemsFindByName, size);
+        if (size == 0) {
+            return null;
+        } else {
+            return Arrays.copyOf(itemsFindByName, size);
+        }
     }
 
     public Item findById(String id) {

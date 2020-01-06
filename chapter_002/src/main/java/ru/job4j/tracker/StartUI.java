@@ -21,7 +21,7 @@ public class StartUI {
         }
     }
 
-    public static void editItem(Input input, Tracker tracker) {
+    public static void replaceItem(Input input, Tracker tracker) {
         System.out.println("=== Edit item ====");
         String id = input.askStr("Enter ID: ");
         String editName = input.askStr("Enter new name: ");
@@ -78,7 +78,7 @@ public class StartUI {
                     StartUI.showAll(tracker);
                     break;
                 case (2):
-                    StartUI.editItem(input, tracker);
+                    StartUI.replaceItem(input, tracker);
                     break;
                 case (3):
                     StartUI.deleteItem(input, tracker);

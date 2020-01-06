@@ -1,20 +1,16 @@
 package ru.job4j.tracker;
 
-import java.util.Scanner;
-
 public class StartUI {
 
-    public void init(Scanner scanner, Tracker tracker) {
+    public void init(Input input, Tracker tracker) {
         boolean run = true;
         while (run) {
             this.showMenu();
-            System.out.print("Select: ");
-            int select = Integer.valueOf(scanner.nextLine());
+            int select = Integer.valueOf(input.askStr("Select: "));
             switch (select) {
                 case (0):
                     System.out.println("=== Create a new Item ====");
-                    System.out.print("Enter name: ");
-                    String name = scanner.nextLine();
+                    String name = input.askStr("Enter name: ");
                     Item item = new Item(name);
                     tracker.add(item);
                     System.out.println("Item created");
@@ -32,10 +28,8 @@ public class StartUI {
                     break;
                 case (2):
                     System.out.println("=== Edit item ====");
-                    System.out.print("Enter ID: ");
-                    String id = scanner.nextLine();
-                    System.out.print("Enter new name: ");
-                    String editName = scanner.nextLine();
+                    String id = input.askStr("Enter ID: ");
+                    String editName = input.askStr("Enter new name: ");
                     Item editItem = new Item(editName);
                     boolean edit = tracker.replace(id, editItem);
                     if (edit) {
@@ -46,8 +40,7 @@ public class StartUI {
                     break;
                 case (3):
                     System.out.println("=== Delete item ====");
-                    System.out.print("Enter ID: ");
-                    String deleteId = scanner.nextLine();
+                    String deleteId = input.askStr("Enter ID: ");
                     boolean delete = tracker.delete(deleteId);
                     if (delete) {
                         System.out.println("Item deleted");
@@ -57,8 +50,7 @@ public class StartUI {
                     break;
                 case (4):
                     System.out.println("=== Find item by Id ====");
-                    System.out.print("Enter ID: ");
-                    String findId = scanner.nextLine();
+                    String findId = input.askStr("Enter ID: ");
                     Item foundById = tracker.findById(findId);
                     if (foundById != null) {
                         System.out.println("Item ID: " + foundById.getId() + ", Item name: " + foundById.getName());
@@ -66,8 +58,7 @@ public class StartUI {
                     break;
                 case (5):
                     System.out.println("=== Find items by name ====");
-                    System.out.print("Enter name: ");
-                    String findName = scanner.nextLine();
+                    String findName = input.askStr("Enter name: ");
                     Item[] foundByName = tracker.findByName(findName);
                     if (foundByName != null) {
                         for (Item found : foundByName) {
@@ -95,9 +86,9 @@ public class StartUI {
 
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
-        new StartUI().init(scanner, tracker);
+        new StartUI().init(input, tracker);
     }
 
 }

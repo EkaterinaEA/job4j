@@ -19,6 +19,7 @@ public class Tracker {
 
     /**
      * Метод реализующий добавление заявки в хранилище
+     *
      * @param item новая заявка
      */
     public Item add(Item item) {
@@ -37,15 +38,11 @@ public class Tracker {
         Item[] itemsFindByName = new Item[items.length];
         int size = 0;
         for (int index = 0; index < position; index++) {
-                if (items[index] != null && items[index].getName().equals(key)) {
-                    itemsFindByName[size++] = items[index];
-                }
+            if (items[index] != null && items[index].getName().equals(key)) {
+                itemsFindByName[size++] = items[index];
             }
-        if (size == 0) {
-            return null;
-        } else {
-            return Arrays.copyOf(itemsFindByName, size);
         }
+        return Arrays.copyOf(itemsFindByName, size);
     }
 
     public Item findById(String id) {
@@ -84,6 +81,7 @@ public class Tracker {
     /**
      * Метод генерирует уникальный ключ для заявки.
      * Так как у заявки нет уникальности полей, имени и описание. Для идентификации нам нужен уникальный ключ.
+     *
      * @return Уникальный ключ.
      */
     private String generateId() {

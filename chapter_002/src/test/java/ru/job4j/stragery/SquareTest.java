@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SquareTest {
 
+    private static final String SEPARATOR = System.getProperty("line.separator");
+
     @Test
     public void whenDrawSquare() {
         Square square = new Square();
@@ -15,10 +17,10 @@ class SquareTest {
                 square.draw(),
                 is(
                         new StringBuilder()
-                                .append("++++++\n")
-                                .append("+    +\n")
-                                .append("+    +\n")
-                                .append("++++++\n")
+                                .append("++++++" + SEPARATOR)
+                                .append("+    +" + SEPARATOR)
+                                .append("+    +" + SEPARATOR)
+                                .append("++++++" + SEPARATOR)
                                 .toString()
                 )
         );

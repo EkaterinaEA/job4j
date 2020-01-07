@@ -21,11 +21,11 @@ public class StartUI {
 
 
     public static void main(String[] args) {
-        Input validate = new ValidateInput();
+        Input input = new ConsoleInput();
+        Input validate = new ValidateInput(input);
         Tracker tracker = new Tracker();
         UserAction[] actions = {
-                new CreateAction(), new ShowAction(), new ReplaceAction(), new DeleteAction(),
-                new FindByIdAction(), new FindByNameAction(), new Exit()
+                new CreateAction()
         };
         new StartUI().init(validate, tracker, actions);
     }

@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 public class StubInput implements Input {
+
     private String[] answers;
     private int position = 0;
 
@@ -15,6 +16,12 @@ public class StubInput implements Input {
 
     @Override
     public int askInt(String question, int max) {
-        return Integer.valueOf(askStr(question));
+        if (question.matches("[0-9]+") && (Integer.valueOf((question)) > max ||
+                Integer.valueOf((question)) < 0)) {
+            throw new IllegalStateException();
+        } else {
+            return Integer.valueOf(askStr(question));
+        }
     }
+
 }

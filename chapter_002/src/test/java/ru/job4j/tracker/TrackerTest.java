@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -29,22 +30,22 @@ class TrackerTest {
         assertThat(resultFindById1.getName(), is(item.getName()));
         assertThat(resultFindById2.getName(), is(item2.getName()));
 
-        Item[] resultFindByName1 = tracker.findByName(item.getName());
-        Item[] resultFindByName2 = tracker.findByName(item2.getName());
+        ArrayList<Item> resultFindByName1 = tracker.findByName(item.getName());
+        ArrayList<Item> resultFindByName2 = tracker.findByName(item2.getName());
 
-        assertThat(resultFindByName1[0].getName(), is(item.getName()));
-        assertThat(resultFindByName1[0].getId(), is(item.getId()));
-        assertThat(resultFindByName2[0].getName(), is(item2.getName()));
-        assertThat(resultFindByName2[0].getId(), is(item2.getId()));
-        assertThat(resultFindByName2[1].getName(), is(item2.getName()));
-        assertThat(resultFindByName2[1].getName(), is(item3.getName()));
-        assertThat(resultFindByName2[1].getId(), is(item3.getId()));
+        assertThat(resultFindByName1.get(0).getName(), is(item.getName()));
+        assertThat(resultFindByName1.get(0).getId(), is(item.getId()));
+        assertThat(resultFindByName2.get(0).getName(), is(item2.getName()));
+        assertThat(resultFindByName2.get(0).getId(), is(item2.getId()));
+        assertThat(resultFindByName2.get(1).getName(), is(item2.getName()));
+        assertThat(resultFindByName2.get(1).getName(), is(item3.getName()));
+        assertThat(resultFindByName2.get(1).getId(), is(item3.getId()));
 
-        Item[] resultList = tracker.findAll();
+        ArrayList<Item> resultList = tracker.findAll();
 
-        assertThat(resultList[0].getName(), is(item.getName()));
-        assertThat(resultList[1].getName(), is(item2.getName()));
-        assertThat(resultList[2].getName(), is(item3.getName()));
+        assertThat(resultList.get(0).getName(), is(item.getName()));
+        assertThat(resultList.get(1).getName(), is(item2.getName()));
+        assertThat(resultList.get(2).getName(), is(item3.getName()));
 
     }
 

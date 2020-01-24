@@ -43,6 +43,5 @@ class ValidateInputTest {
         );
         System.setOut(out);
     }
-
    */
 }

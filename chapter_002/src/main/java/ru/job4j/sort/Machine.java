@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Machine {
 
-    private final int[] COINS = {10, 5, 2, 1};
+    private static final int[] COINS = {10, 5, 2, 1};
 
     public int[] change(int money, int price) {
         int[] rsl = new int[100];

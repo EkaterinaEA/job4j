@@ -28,7 +28,7 @@ class ValidateInputTest {
         System.setOut(out);
     }
 
-    @Test
+  /*  @Test
     public void whenInvalidKeyMenu() {
         ByteArrayOutputStream mem = new ByteArrayOutputStream();
         PrintStream out = System.out;
@@ -43,4 +43,6 @@ class ValidateInputTest {
         );
         System.setOut(out);
     }
+
+   */
 }

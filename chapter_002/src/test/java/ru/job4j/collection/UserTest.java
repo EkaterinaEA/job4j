@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -11,6 +12,7 @@ import java.util.TreeSet;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.lessThan;
 
 public class UserTest {
     @Test
@@ -30,5 +32,15 @@ public class UserTest {
                         new User("Ivan", 31)
                 );
         assertThat(rsl, greaterThan(0));
+    }
+
+    @Test
+    public void whenCompatorAscendingByNameAndDescByPrority() {
+        Comparator<User> cmpNamePriority = new UserAscendingByName().thenComparing(new UserDescByPriority());
+        int rsl = cmpNamePriority.compare(
+                new User("name3", 10),
+                new User("name1", 30)
+        );
+        assertThat(rsl, lessThan(30));
     }
 }

@@ -1,7 +1,6 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -60,10 +59,11 @@ public class Tracker {
     public boolean delete(String id) {
         int index = indexOf(id);
         if (index != -1) {
-            items.remove(findById(id));
+            items.remove(index);
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -80,8 +80,9 @@ public class Tracker {
     private int indexOf(String id) {
         int rsl = -1;
         for (Item item : items) {
+            rsl++;
             if (item.getId().equals(id)) {
-                rsl = items.indexOf(item);
+                break;
             }
         }
         return rsl;

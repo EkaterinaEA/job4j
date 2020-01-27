@@ -20,4 +20,16 @@ public class PriorityQueue {
     public Task take() {
         return tasks.remove(0);
     }
+
+    public static void main(String[] args) {
+        Task task = new Task("task", 656);
+        Task task1 = new Task("task1", 656);
+        LinkedList<Task> tasks = new LinkedList<>();
+        tasks.add(task);
+        tasks.add(null);
+        tasks.add(task1);
+        System.out.println(tasks.indexOf(task));
+        System.out.println(tasks.indexOf(task1));
+
+    }
 }

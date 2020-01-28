@@ -39,4 +39,9 @@ public class Account {
     public int hashCode() {
         return Objects.hash(requisite);
     }
+
+    public void transfer(Account destination, double amount) {
+        destination.setBalance(destination.getBalance() + amount);
+        this.setBalance(this.getBalance() - amount);
+    }
 }

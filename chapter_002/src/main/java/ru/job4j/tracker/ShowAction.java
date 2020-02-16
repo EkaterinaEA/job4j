@@ -1,8 +1,11 @@
 package ru.job4j.tracker;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ShowAction implements UserAction {
+
+    private Consumer<String> output;
 
     @Override
     public String name() {
@@ -13,10 +16,10 @@ public class ShowAction implements UserAction {
     public boolean execute(Input input, Tracker tracker) {
         List<Item> resultList = tracker.findAll();
         if (resultList.size() == 0) {
-            System.out.println("Not found");
+            output.accept("Not found");
         } else {
             for (Item show : resultList) {
-                System.out.println("Item ID: " + show.getId() + ", Item name: " + show.getName());
+                output.accept("Item ID: " + show.getId() + ", Item name: " + show.getName());
             }
         }
         return true;

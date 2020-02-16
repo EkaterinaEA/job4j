@@ -1,8 +1,11 @@
 package ru.job4j.tracker;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class FindByNameAction implements UserAction {
+
+    private Consumer<String> output;
 
     @Override
     public String name() {
@@ -15,10 +18,10 @@ public class FindByNameAction implements UserAction {
         List<Item> foundByName = tracker.findByName(findName);
         if (foundByName != null) {
             for (Item found : foundByName) {
-                System.out.println("Item ID: " + found.getId() + ", Item name: " + found.getName());
+                output.accept("Item ID: " + found.getId() + ", Item name: " + found.getName());
             }
         } else {
-            System.out.println("Not found");
+            output.accept("Not found");
         }
         return true;
     }

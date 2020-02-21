@@ -25,4 +25,8 @@ public class Address {
                 ", apartment=" + apartment +
                 '}';
     }
+
+    public String getCity() {
+        return city;
+    }
 }

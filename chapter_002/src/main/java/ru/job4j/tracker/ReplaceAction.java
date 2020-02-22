@@ -4,15 +4,13 @@ import java.util.function.Consumer;
 
 public class ReplaceAction implements UserAction {
 
-    private Consumer<String> output;
-
     @Override
     public String name() {
         return "=== Edit item ====";
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Tracker tracker, Consumer<String> output) {
         String id = input.askStr("Enter ID: ");
         String editName = input.askStr("Enter new name: ");
         Item editItem = new Item(editName);

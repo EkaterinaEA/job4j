@@ -5,15 +5,13 @@ import java.util.function.Consumer;
 
 public class FindByNameAction implements UserAction {
 
-    private Consumer<String> output;
-
     @Override
     public String name() {
         return "=== Find items by name ====";
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Tracker tracker, Consumer<String> output) {
         String findName = input.askStr("Enter name: ");
         List<Item> foundByName = tracker.findByName(findName);
         if (foundByName != null) {

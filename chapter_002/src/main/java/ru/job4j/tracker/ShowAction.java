@@ -5,15 +5,13 @@ import java.util.function.Consumer;
 
 public class ShowAction implements UserAction {
 
-    private Consumer<String> output;
-
     @Override
     public String name() {
         return "=== Show all Items ====";
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Tracker tracker, Consumer<String> output) {
         List<Item> resultList = tracker.findAll();
         if (resultList.size() == 0) {
             output.accept("Not found");

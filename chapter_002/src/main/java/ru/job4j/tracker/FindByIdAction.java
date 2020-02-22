@@ -4,15 +4,13 @@ import java.util.function.Consumer;
 
 public class FindByIdAction implements UserAction {
 
-    private Consumer<String> output;
-
     @Override
     public String name() {
         return "=== Find item by Id ====";
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Tracker tracker, Consumer<String> output) {
         String findId = input.askStr("Enter ID: ");
         Item foundById = tracker.findById(findId);
         if (foundById != null) {

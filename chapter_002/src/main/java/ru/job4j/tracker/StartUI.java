@@ -6,35 +6,22 @@ import java.util.function.Consumer;
 
 public class StartUI {
 
-    private Consumer<String> output;
-
-    public void init(Input input, Tracker tracker, List<UserAction> actions) {
+    public void init(Input input, Tracker tracker, List<UserAction> actions, Consumer<String> output) {
         boolean run = true;
         while (run) {
-            this.showMenu(actions);
+            this.showMenu(actions, output);
             int select = input.askInt("Select: ", actions.size());
             UserAction action = actions.get(select);
             run = action.execute(input, tracker);
         }
     }
 
-    private void showMenu(List<UserAction> actions) {
+    private void showMenu(List<UserAction> actions, Consumer<String> output) {
         output.accept("Menu.");
         int index = 0;
         for (UserAction userAction : actions) {
             output.accept(index++ + ". " + userAction.name());
         }
     }
-
-
-    public static void main(String[] args) {
-        Input input = new StubInput();
-        Input validate = new ValidateInput(input);
-        Tracker tracker = new Tracker();
-        List<UserAction> actions = new ArrayList<>();
-        actions.add(new CreateAction());
-        new StartUI().init(validate, tracker, actions);
-    }
-
     
 }

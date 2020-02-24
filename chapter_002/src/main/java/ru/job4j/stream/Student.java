@@ -51,11 +51,13 @@ public class Student {
                 new Student(100, "Ko")
         );
 
-        List<Student> classA = getClass10A(students);
-        List<Student> classB = getClass10B(students);
-        List<Student> classC = getClass10C(students);
+        List<Student> classA = sortClass(students, p -> p.getScore() > 70);
+        List<Student> classB = sortClass(students, p -> p.getScore() > 50 && p.getScore() < 70);
+        List<Student> classC = sortClass(students, p -> p.getScore() > 0 && p.getScore() < 50);
 
         classA.stream().forEach(System.out::println);
+        classB.stream().forEach(System.out::println);
+        classC.stream().forEach(System.out::println);
 
         Map<String, Student> studentsMap = convertListToMap(students);
 

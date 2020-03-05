@@ -10,9 +10,9 @@ public class StartUI {
         boolean run = true;
         while (run) {
             this.showMenu(actions, output);
-            int select = input.askInt("Select: ", actions.size());
+            int select = input.askInt("Select: ", actions.size(), output);
             UserAction action = actions.get(select);
-            run = action.execute(input, tracker);
+            run = action.execute(input, tracker, output);
         }
     }
 

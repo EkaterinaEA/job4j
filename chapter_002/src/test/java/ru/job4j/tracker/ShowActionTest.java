@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.StringJoiner;
+import java.util.function.Consumer;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -21,7 +22,7 @@ class ShowActionTest {
         Item item = new Item("fix bug");
         tracker.add(item);
         ShowAction act = new ShowAction();
-        act.execute(new StubInput(new String[] {}), tracker);
+       // act.execute(new StubInput(new String[] {}), tracker, );
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("Item ID: " + item.getId() + ", Item name: " + item.getName())
                 .toString();

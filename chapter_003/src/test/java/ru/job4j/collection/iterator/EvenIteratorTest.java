@@ -1,8 +1,9 @@
-package ru.job4j.collection;
+package ru.job4j.collection.iterator;
 
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.collection.iterator.EvenIterator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

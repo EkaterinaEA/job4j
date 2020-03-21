@@ -1,6 +1,7 @@
-package ru.job4j.collection;
+package ru.job4j.collection.iterator;
 
 import org.junit.jupiter.api.Test;
+import ru.job4j.collection.iterator.MatrixIterator;
 
 import java.util.ArrayList;
 import java.util.List;

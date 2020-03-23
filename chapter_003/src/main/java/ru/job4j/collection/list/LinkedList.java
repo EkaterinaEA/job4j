@@ -18,18 +18,18 @@ public class LinkedList<E> implements Iterable<E> {
 
     public void addFirst(E e) {
         Node<E> next = firstNode;
-        next.setCurrentElement(e);
+        next.currentElement = e;
         firstNode = new Node<E>(null, next, null);
-        next.setPrevElement(firstNode);
+        next.prevElement = firstNode;
         size++;
         modCount++;
     }
 
     public void addLast(E e) {
         Node<E> prev = lastNode;
-        prev.setCurrentElement(e);
+        prev.currentElement = e;
         lastNode = new Node<E>(null, null, prev);
-        prev.setNextElement(lastNode);
+        prev.nextElement = lastNode;
         size++;
         modCount++;
     }
@@ -40,15 +40,15 @@ public class LinkedList<E> implements Iterable<E> {
 
     public E getElementByIndex(int counter) {
         checkElementIndex(counter);
-        Node<E> target = firstNode.getNextElement();
+        Node<E> target = firstNode.nextElement;
         for (int i = 0; i < counter; i++) {
             target = getNextElement(target);
         }
-        return target.getCurrentElement();
+        return target.currentElement;
     }
 
     private Node<E> getNextElement(Node<E> current) {
-        return current.getNextElement();
+        return current.nextElement;
     }
 
     private void checkElementIndex(int index) {
@@ -99,6 +99,31 @@ public class LinkedList<E> implements Iterable<E> {
         };
     }
 
+    private E unlinkFirst(Node<E> f) {
+        final E element = f.currentElement;
+        final Node<E> next = f.nextElement;
+        f.currentElement = null;
+        f.nextElement = null;
+        firstNode = next;
+        if (next == null) {
+            lastNode = null;
+        } else {
+            next.prevElement = null;
+        }
+        size--;
+        modCount++;
+        return element;
+    }
+
+    public E removeFirst() {
+        final Node<E> f = firstNode;
+        E removed = null;
+        if (f != null) {
+            removed = unlinkFirst(f);
+        }
+        return removed;
+    }
+
     private class Node<E> {
 
         private E currentElement;
@@ -108,26 +133,6 @@ public class LinkedList<E> implements Iterable<E> {
         public Node(E currentElement, Node<E> nextElement, Node<E> prevElement) {
             this.currentElement = currentElement;
             this.nextElement = nextElement;
-            this.prevElement = prevElement;
-        }
-
-        public E getCurrentElement() {
-            return currentElement;
-        }
-
-        public void setCurrentElement(E currentElement) {
-            this.currentElement = currentElement;
-        }
-
-        public Node<E> getNextElement() {
-            return nextElement;
-        }
-
-        public void setNextElement(Node<E> nextElement) {
-            this.nextElement = nextElement;
-        }
-
-        public void setPrevElement(Node<E> prevElement) {
             this.prevElement = prevElement;
         }
     }

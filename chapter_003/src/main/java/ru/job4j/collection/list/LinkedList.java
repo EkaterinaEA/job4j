@@ -2,7 +2,6 @@ package ru.job4j.collection.list;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class LinkedList<E> implements Iterable<E> {
 
@@ -100,7 +99,7 @@ public class LinkedList<E> implements Iterable<E> {
     }
 
     private E unlinkFirst(Node<E> f) {
-        final E element = f.currentElement;
+        final E element = f.nextElement.currentElement;
         final Node<E> next = f.nextElement;
         f.currentElement = null;
         f.nextElement = null;
@@ -122,6 +121,16 @@ public class LinkedList<E> implements Iterable<E> {
             removed = unlinkFirst(f);
         }
         return removed;
+    }
+
+    public E pop(){
+        if (size == 0) {
+            System.out.println("List is empty");
+        }
+        Node<E> lastFirst = firstNode;
+        firstNode = firstNode.nextElement;
+        size --;
+        return lastFirst.nextElement.currentElement;
     }
 
     private class Node<E> {

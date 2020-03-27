@@ -14,7 +14,11 @@ public class MatrixIterator implements Iterator<Integer> {
 
     public MatrixIterator(int[][] array) {
         this.array = array;
-        this.size = Arrays.stream(array).flatMapToInt(Arrays::stream).count();
+        int amount = 0;
+        for (int i = 0; i < array.length; i++) {
+            amount = amount + array[i].length;
+        }
+        this.size = amount;
     }
 
     @Override

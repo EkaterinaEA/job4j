@@ -57,7 +57,7 @@ public class AbstractStore<T extends Base> implements Store<T> {
     public T findById(String id) {
         int index = getIndex(id);
         if (index == -1) {
-            throw new NoSuchElementException("no element");
+            return null;
         }
         return this.simpleArray.get(index);
     }

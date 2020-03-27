@@ -14,9 +14,11 @@ public class UserTest {
         User user1 = new User("user", 0, new GregorianCalendar(2017, 0, 25));
         User user2 = new User("user", 0, new GregorianCalendar(2017, 0, 25));
 
+        User test = new User("test", 0, new GregorianCalendar(2017, 0, 25));
+
         Map<User, Object> map = new HashMap<>();
         map.put(user1, new Object());
-        map.put(user2, new Object());
+        map.put(user2, test);
 
         assertThat(map.size(), is(1));
         System.out.println(map);

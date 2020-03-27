@@ -7,6 +7,7 @@ public class EvenIterator implements Iterator<Integer> {
 
     private final int[] array;
     private int count = 0;
+    private int nextEvenIndex;
 
     public EvenIterator(int[] array) {
         this.array = array;
@@ -15,29 +16,23 @@ public class EvenIterator implements Iterator<Integer> {
     @Override
     public boolean hasNext() {
         boolean hasNext = false;
-        for (int i = count; i < array.length; i++) {
-            if (array[i] % 2 == 0) {
-                hasNext = true;
-                break;
-            }
+        while (count < array.length && array[count] % 2 != 0) {
+            count++;
+        }
+        if (count < array.length) {
+            nextEvenIndex = count;
+            hasNext = true;
         }
         return hasNext;
     }
 
     @Override
     public Integer next() {
-        Integer next = null;
-        for (int i = count; i < array.length; i++) {
-            if (array[i] % 2 == 0) {
-                next = array[i];
-                count = ++i;
-                break;
-            }
-        }
-        if (next == null) {
+        if (!hasNext()) {
             throw new NoSuchElementException("no next element");
         }
-        return next;
+        count = nextEvenIndex + 1;
+        return array[nextEvenIndex];
     }
 
 }

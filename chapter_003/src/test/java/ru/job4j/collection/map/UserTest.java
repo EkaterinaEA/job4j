@@ -22,6 +22,7 @@ public class UserTest {
         System.out.println(map);
         System.out.println(map.get(user1));
         System.out.println(map.get(user2));
+        assertTrue(user1.equals(user2));
     }
 
 }

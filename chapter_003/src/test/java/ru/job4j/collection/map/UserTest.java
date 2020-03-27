@@ -18,7 +18,7 @@ public class UserTest {
         map.put(user1, new Object());
         map.put(user2, new Object());
 
-        assertThat(map.size(), is(2));
+        assertThat(map.size(), is(1));
         System.out.println(map);
         System.out.println(map.get(user1));
         System.out.println(map.get(user2));

@@ -1,6 +1,5 @@
 package ru.job4j.collection.generic;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -22,6 +21,7 @@ public class SimpleArray<T> implements Iterable<T> {
             checkSize(index);
         }
         this.array[index] = model;
+        marker++;
     }
 
     public void remove(int index) throws ArrayIndexOutOfBoundsException {
@@ -32,7 +32,7 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public T get(int index) {
-        return (index < this.array.length) ? (T) this.array[index] : null;
+        return (index < marker) ? (T) this.array[index] : null;
     }
 
     private void checkSize(int index) throws ArrayIndexOutOfBoundsException {
@@ -43,33 +43,21 @@ public class SimpleArray<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new SimpleArrayIterator(marker, (Iterator<T>) Arrays.stream(this.array).iterator());
-    }
+        return new Iterator<T>() {
+            private int index = 0;
 
-    private class SimpleArrayIterator implements Iterator<T> {
-
-        private final int size;
-        private int marker;
-        private final Iterator<T> arrayIterator;
-
-        public SimpleArrayIterator(int size, Iterator<T> arrayIterator) {
-            this.size = size;
-            this.arrayIterator = arrayIterator;
-            marker = 0;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return (marker <= size - 1) && arrayIterator.hasNext();
-        }
-
-        @Override
-        public T next() {
-            if (marker > size - 1) {
-                throw new NoSuchElementException("no element");
+            @Override
+            public boolean hasNext() {
+                return index < array.length;
             }
-            marker++;
-            return arrayIterator.next();
-        }
+
+            @Override
+            public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return (T) array[index++];
+            }
+        };
     }
 }

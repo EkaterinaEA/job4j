@@ -26,8 +26,8 @@ public class SimpleArrayTest {
     public void whenSetElementShouldGetSameElement() {
         SimpleArray<Integer> simpleArray = new SimpleArray<>(3);
         Integer expected = 123;
-        simpleArray.set(1, expected);
-        assertThat(simpleArray.get(1), is(expected));
+        simpleArray.set(0, expected);
+        assertThat(simpleArray.get(0), is(expected));
     }
 
     @Test

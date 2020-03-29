@@ -29,7 +29,6 @@ public class LinkedListTest {
     @Test
     public void whenUsingIteratorShouldSame() {
         Iterator<String> iterator = this.list.iterator();
-        String[] expected = new String[] {"zero", "one"};
         String[] actual = new String[2];
         actual[0] = iterator.next();
         actual[1] = iterator.next();

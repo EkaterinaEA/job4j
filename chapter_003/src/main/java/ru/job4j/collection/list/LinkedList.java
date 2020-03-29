@@ -2,6 +2,7 @@ package ru.job4j.collection.list;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class LinkedList<E> implements Iterable<E> {
 
@@ -61,17 +62,22 @@ public class LinkedList<E> implements Iterable<E> {
         final int expectedModCount = modCount;
 
         return new Iterator<E>() {
-            int counter = 0;
+            Node<E> current = firstNode.nextElement;
 
             @Override
             public boolean hasNext() {
-                return counter < size;
+                return current.nextElement != null;
             }
 
             @Override
             public E next() {
+                if (current.nextElement == null) {
+                    throw new IndexOutOfBoundsException();
+                }
+                E next = current.currentElement;
                 checkForModification();
-                return getElementByIndex(counter++);
+                current = current.nextElement;
+                return next;
             }
 
             final void checkForModification() {
@@ -83,17 +89,30 @@ public class LinkedList<E> implements Iterable<E> {
     }
 
     public Iterator<E> descendingIterator() {
+        final int expectedModCount = modCount;
         return new Iterator<E>() {
-            int counter = size - 1;
+            Node<E> current = lastNode.prevElement;
 
             @Override
             public boolean hasNext() {
-                return counter >= 0;
+                return current.prevElement != null;
             }
 
             @Override
             public E next() {
-                return getElementByIndex(counter--);
+                if (current.prevElement == null) {
+                    throw new IndexOutOfBoundsException();
+                }
+                E next = current.currentElement;
+                checkForModification();
+                current = current.prevElement;
+                return next;
+            }
+
+            final void checkForModification() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
             }
         };
     }

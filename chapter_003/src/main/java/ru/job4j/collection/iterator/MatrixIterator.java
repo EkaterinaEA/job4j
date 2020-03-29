@@ -1,48 +1,36 @@
 package ru.job4j.collection.iterator;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class MatrixIterator implements Iterator<Integer> {
 
     private final int[][] array;
-    private final long size;
     private int x = 0;
     private int y = 0;
-    private long count = 0;
 
     public MatrixIterator(int[][] array) {
         this.array = array;
-        int amount = 0;
-        for (int i = 0; i < array.length; i++) {
-            amount = amount + array[i].length;
-        }
-        this.size = amount;
     }
 
     @Override
     public boolean hasNext() {
-        return count < this.size;
+        return x < this.array.length && y < this.array[x].length;
     }
 
     @Override
     public Integer next() {
         int next;
-        try {
-            next = this.array[this.x][this.y];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new NoSuchElementException("no next element");
+        if (!hasNext()) {
+            throw new NoSuchElementException();
         }
-        if (this.array[this.x].length - 1 > this.y) {
-            this.y++;
+        next = this.array[x][y];
+        if (array[x].length - 1 > y) {
+            y++;
         } else {
-            if (this.array.length - 1 > this.x) {
-                this.x++;
-                this.y = 0;
-            }
+            x++;
+            y = 0;
         }
-        count++;
         return next;
     }
 }

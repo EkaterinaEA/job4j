@@ -13,6 +13,12 @@ public class SimpleSet<E> implements Iterable<E> {
     }
 
     public void add(E e) {
+        if (contains(e)) {
+            list.add(e);
+        }
+    }
+
+    private boolean contains(E e) {
         boolean isNew = true;
         for (E item : list) {
             if (item == null) {
@@ -25,9 +31,7 @@ public class SimpleSet<E> implements Iterable<E> {
                 break;
             }
         }
-        if (isNew) {
-            list.add(e);
-        }
+        return isNew;
     }
 
     @Override

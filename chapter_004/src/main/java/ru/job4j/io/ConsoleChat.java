@@ -11,7 +11,7 @@ public class ConsoleChat {
     private static String logFile = "data\\ChatLog.txt";
     private static boolean check = true;
     private String[] inputTestData;
-    String[] answers = readFile("data\\Sonnet2");
+    private String[] answers = readFile("data\\Sonnet2");
 
     public ConsoleChat() {
 
@@ -68,7 +68,7 @@ public class ConsoleChat {
         }
     }
 
-    public static void writeLog(String line) {
+    private static void writeLog(String line) {
         try (FileWriter writer = new FileWriter(logFile, true)) {
             writer.write(line + System.lineSeparator());
             writer.flush();

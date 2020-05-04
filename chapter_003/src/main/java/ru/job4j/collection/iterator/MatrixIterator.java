@@ -20,11 +20,10 @@ public class MatrixIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        int next;
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        next = this.array[x][y];
+        int next = this.array[x][y];
         if (array[x].length - 1 > y) {
             y++;
         } else {

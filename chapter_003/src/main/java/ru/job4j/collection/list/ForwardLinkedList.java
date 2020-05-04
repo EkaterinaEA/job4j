@@ -80,13 +80,36 @@ public class ForwardLinkedList<T> implements Iterable<T> {
         };
     }
 
-    private static class Node<T> {
-        T value;
-        Node<T> next;
+    public static class Node<T> {
+        public T value;
+        public Node<T> next;
+
+        public Node(T value) {
+            this.value = value;
+        }
 
         public Node(T value, Node<T> next) {
             this.value = value;
             this.next = next;
         }
     }
+
+
+    // Алгоритм «черепахи и зайца» Флойда определяющий, что список содержит замыкания.
+    // список может быть замкнут и в середине. К примеру, 3-й узел будет ссылаться на 2-й узел.
+    // Определение зацикленности реализовано путем прохода по узлам, без использования коллекций.
+    public boolean hasLoop(Node first) {
+        Node tortoise = first;
+        Node hare = first;
+
+        while (hare != null && hare.next != null) {
+            tortoise = tortoise.next;
+            hare = hare.next.next;
+            if (tortoise == hare) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

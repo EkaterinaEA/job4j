@@ -21,9 +21,9 @@ public class CustomHashMap<K, V> implements Iterable<V> {
         }
     }
 
-    private Node<K, V>[] table;
+    private Node<K, V>[] table = (Node<K, V>[]) new Node[16];
 
-    static int hash(Object key) {
+    private static int hash(Object key) {
         int h;
         if (key == null) {
             h = 0;
@@ -32,10 +32,6 @@ public class CustomHashMap<K, V> implements Iterable<V> {
             h = h ^ (h >>> 16);
         }
         return h;
-    }
-
-    public CustomHashMap() {
-        table = (Node<K, V>[]) new Node[16];
     }
 
     private int indexFor(int hash) {
@@ -56,7 +52,7 @@ public class CustomHashMap<K, V> implements Iterable<V> {
         }
     }
 
-    public boolean insert(K key, V value) {
+    private boolean insert(K key, V value) {
         boolean result = false;
         if (size == table.length) {
             resize(size * 2);

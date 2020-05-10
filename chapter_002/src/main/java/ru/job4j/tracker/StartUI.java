@@ -5,23 +5,51 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class StartUI {
+    /**
+     * Получение данных от пользователя.
+     */
+    private final Input input;
 
-    public void init(Input input, Tracker tracker, List<UserAction> actions, Consumer<String> output) {
-        boolean run = true;
-        while (run) {
-            this.showMenu(actions, output);
-            int select = input.askInt("Select: ", actions.size(), output);
-            UserAction action = actions.get(select);
-            run = action.execute(input, tracker, output);
+    /*
+     * Вывод данных
+     */
+    private final Consumer<String> output;
+
+    /**
+     * Хранилище заявок.
+     */
+    private final ITracker tracker;
+
+    /**
+     * Конструтор инициализирующий поля.
+     *
+     * @param input   ввод данных.
+     * @param tracker хранилище заявок.
+     */
+    public StartUI(Input input, ITracker tracker, Consumer<String> output) {
+        this.input = input;
+        this.tracker = tracker;
+        this.output = output;
+    }
+
+    /**
+     * Основой цикл программы.
+     */
+    public void init() {
+        MenuTracker menu = new MenuTracker(this.input, this.tracker, this.output);
+        menu.fillActions();
+        while (!menu.isExit()) {
+            menu.show();
+            menu.select(input.ask("select:", menu.range()));
         }
     }
 
-    private void showMenu(List<UserAction> actions, Consumer<String> output) {
-        output.accept("Menu.");
-        int index = 0;
-        for (UserAction userAction : actions) {
-            output.accept(index++ + ". " + userAction.name());
-        }
+    /**
+     * Запуск программы.
+     *
+     * @param args параметры запуска.
+     */
+    public static void main(String[] args) {
+        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker(), System.out::println).init();
     }
-    
 }

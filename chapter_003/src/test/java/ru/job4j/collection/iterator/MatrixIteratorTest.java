@@ -14,7 +14,7 @@ class MatrixIteratorTest {
     @Test
     void whenJaggedArray() {
 
-        MatrixIterator matrixIterator = new MatrixIterator(new int[][]{{5, 6}, {1, 2, 3, 4}});
+        MatrixIterator matrixIterator = new MatrixIterator(new Integer[][]{{5, 6}, {1, 2, 3, 4}});
         Integer[] expected = new Integer[] {5, 6, 1, 2, 3, 4};
         List<Integer> list = new ArrayList<>();
 

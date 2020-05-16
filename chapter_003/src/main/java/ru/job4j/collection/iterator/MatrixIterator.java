@@ -5,17 +5,20 @@ import java.util.NoSuchElementException;
 
 public class MatrixIterator implements Iterator<Integer> {
 
-    private final int[][] array;
+    private final Integer[][] array;
     private int x = 0;
     private int y = 0;
 
-    public MatrixIterator(int[][] array) {
+    public MatrixIterator(Integer[][] array) {
         this.array = array;
     }
 
     @Override
     public boolean hasNext() {
-        return x < this.array.length && y < this.array[x].length;
+        while (compareWithLength() && array[x][y] == null) {
+            moveItemIndex();
+        }
+        return compareWithLength();
     }
 
     @Override
@@ -24,12 +27,20 @@ public class MatrixIterator implements Iterator<Integer> {
             throw new NoSuchElementException();
         }
         int next = this.array[x][y];
+        moveItemIndex();
+        return next;
+    }
+
+    private void moveItemIndex() {
         if (array[x].length - 1 > y) {
             y++;
         } else {
             x++;
             y = 0;
         }
-        return next;
+    }
+
+    private boolean compareWithLength() {
+        return x < this.array.length && y < this.array[x].length;
     }
 }

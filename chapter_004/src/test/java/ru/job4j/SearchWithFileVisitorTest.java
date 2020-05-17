@@ -43,7 +43,7 @@ public class SearchWithFileVisitorTest {
     @Test
     public void searchTxt() throws IOException {
         Path path = Paths.get(folder.getRoot().getAbsolutePath());
-        List<String> actualList = SearchWithFileVisitor.search(path, "txt");
+        List<String> actualList = SearchWithFileVisitor.search(path, file -> file.endsWith("txt"));
         assertThat(actualList.get(0), is(file2.getAbsolutePath()));
         assertThat(actualList.get(1), is(file3.getAbsolutePath()));
     }
@@ -51,7 +51,7 @@ public class SearchWithFileVisitorTest {
     @Test
     public void searchPdf() throws IOException {
         Path path = Paths.get(folder.getRoot().getAbsolutePath());
-        List<String> actualList = SearchWithFileVisitor.search(path, "pdf");
+        List<String> actualList = SearchWithFileVisitor.search(path, file -> file.endsWith("pdf"));
         assertThat(actualList.get(0), is(file4.getAbsolutePath()));
         assertThat(actualList.get(1), is(file5.getAbsolutePath()));
     }

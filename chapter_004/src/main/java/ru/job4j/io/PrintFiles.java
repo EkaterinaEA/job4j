@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
 
@@ -35,9 +37,11 @@ public class PrintFiles implements FileVisitor<Path> {
         return CONTINUE;
     }
 
-    static List<String> filterByExt(String ext) {
-        List<String> result = new ArrayList<>();
-        out.stream().filter(el -> el.endsWith(ext)).forEach(result::add);
-        return result;
+    static List<String> filterByExt(Predicate<String> predict) {
+        return out.stream().filter(predict).collect(Collectors.toList());
+     //   List<String> result = new ArrayList<>();
+     //   out.stream().filter(el -> el.endsWith(ext)).forEach(result::add);
+     //   return result;
     }
+
 }

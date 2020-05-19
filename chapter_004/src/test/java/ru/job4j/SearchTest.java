@@ -45,14 +45,14 @@ public class SearchTest {
     public void searchTxt() {
         List<File> expected = List.of(file2, file3);
         Path path = Paths.get(folder.getRoot().getAbsolutePath());
-        assertTrue(new Search().search(path, "txt").containsAll(expected));
+        assertTrue(new Search().search(path.toString(), file -> file.toString().endsWith("txt")).containsAll(expected));
     }
 
     @Test
     public void searchPdf() {
         List<File> expected = List.of(file4, file5);
         Path path = Paths.get(folder.getRoot().getAbsolutePath());
-        assertTrue(new Search().search(path, "pdf").containsAll(expected));
+        assertTrue(new Search().search(path.toString(), file -> file.toString().endsWith("pdf")).containsAll(expected));
     }
 
 }

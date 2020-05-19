@@ -9,7 +9,7 @@ public class Zip {
 
     private String root;
 
-    public void packFiles(List<File> source, File target) {
+    public void pack(List<File> source, File target) {
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
             for (File file : source) {
                 String name = file.getPath();
@@ -24,4 +24,9 @@ public class Zip {
         }
     }
 
+    List<File> seekBy(String root, List<String> ext) {
+        this.root = root;
+        Search search = new Search();
+        return search.search(root, search.getPredicateWithoutList(ext));
+    }
 }

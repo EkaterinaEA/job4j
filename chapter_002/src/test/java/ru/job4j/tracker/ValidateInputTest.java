@@ -1,47 +1,35 @@
 package ru.job4j.tracker;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
-class ValidateInputTest {
-
-    private static final String SEPARATOR = System.getProperty("line.separator");
+public class ValidateInputTest {
 
     @Test
     public void whenInvalidInput() {
-        ByteArrayOutputStream mem = new ByteArrayOutputStream();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         PrintStream out = System.out;
-        System.setOut(new PrintStream(mem));
-        ValidateInput input = new ValidateInput(
-                new StubInput(new String[] {"invalid", "1"})
-        );
-      //  input.askInt("Enter", 1);
-        assertThat(
-                mem.toString(),
-                is(String.format("Please enter validate data again " + SEPARATOR))
-        );
+        System.setOut(new PrintStream(byteArrayOutputStream));
+        ValidateInput validateInput = new ValidateInput(new StubInput(new String[]{"invalid", "1"}));
+        validateInput.askInt("Enter", 6);
+        assertThat(byteArrayOutputStream.toString(), is(String.format("Please enter validate data%n")));
         System.setOut(out);
     }
 
-  /*  @Test
-    public void whenInvalidKeyMenu() {
-        ByteArrayOutputStream mem = new ByteArrayOutputStream();
+    @Test
+    public void whenIllegalState() {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         PrintStream out = System.out;
-        System.setOut(new PrintStream(mem));
-        ValidateInput input = new ValidateInput(
-                new StubInput(new String[] {"7", "1"})
-        );
-        input.askInt("Enter", 1);
-        assertThat(
-                mem.toString(),
-                is(String.format("Please select key from menu " + SEPARATOR))
-        );
+        System.setOut(new PrintStream(byteArrayOutputStream));
+        ValidateInput validateInput = new ValidateInput(new StubInput(new String[]{"7", "1"}));
+        validateInput.askInt("Enter", 6);
+        assertThat(byteArrayOutputStream.toString(), is(String.format("Please enter key from menu%n")));
         System.setOut(out);
     }
-   */
+
 }

@@ -1,23 +1,17 @@
 package ru.job4j.tracker;
 
-import java.util.function.Consumer;
-
 public class DeleteAction implements UserAction {
-
     @Override
     public String name() {
-        return "=== Delete item ====";
+        return "===== Delete a new Item =====";
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker, Consumer<String> output) {
-        String deleteId = input.askStr("Enter ID: ");
-        boolean delete = tracker.delete(deleteId);
-        if (delete) {
-            output.accept("Item deleted");
-        } else {
-            output.accept("ID not found");
-        }
+    public boolean execute(Input input, Tracker tracker) {
+        System.out.println("Enter id: ");
+        String id = input.askStr("");
+        tracker.delete(id);
+        System.out.println("Item deleted");
         return true;
     }
 }

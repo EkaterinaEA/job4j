@@ -1,7 +1,5 @@
 package ru.job4j.tracker;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -9,30 +7,29 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.StringJoiner;
+import java.util.function.Consumer;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-public class StartUITest {
+public class StartUITest2 {
 
-    private final PrintStream stdout = System.out;
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private final Consumer<String> output = new Consumer<String>() {
 
-    @Before
-    public void loadOutput() {
-        System.setOut(new PrintStream(this.out));
-    }
+        private final PrintStream stdout = new PrintStream(out);
 
-    @After
-    public void baskOutput() {
-        System.setOut(this.stdout);
-    }
+        @Override
+        public void accept(String s) {
+            stdout.println(s);
+        }
+    };
 
     @Test
     public void whenExit() {
-        StubInput stubInput = new StubInput(new String[]{"0"});
+        StubInput input = new StubInput(new String[]{"0"});
         StubAction action = new StubAction();
-        new StartUI(stubInput, new Tracker(), System.out::println).init(new ArrayList<UserAction>(Arrays.asList(action)));
+        new StartUI(input, new Tracker(), output).init(new ArrayList<UserAction>(Arrays.asList(action)));
         assertThat(action.isCall(), is(true));
     }
 
@@ -40,7 +37,7 @@ public class StartUITest {
     public void whenPrtMenu() {
         StubInput input = new StubInput(new String[]{"0"});
         StubAction action = new StubAction();
-        new StartUI(input, new Tracker(), System.out::println).init(new ArrayList<UserAction>(Arrays.asList(action)));
+        new StartUI(input, new Tracker(), output).init(new ArrayList<UserAction>(Arrays.asList(action)));
         String expected = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("Menu")
                 .add("0. ===== Stub action =====")

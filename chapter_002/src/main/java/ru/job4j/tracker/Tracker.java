@@ -1,100 +1,77 @@
 package ru.job4j.tracker;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
-/**
- * @version $Id$
- * @since 0.1
- */
-public class Tracker implements ITracker {
+public class Tracker {
 
-    /**
-     * Массив для хранение заявок.
-     */
-    private final List<Item> items = new ArrayList<>();
+    private final ArrayList<Item> items = new ArrayList<>();
 
-    /**
-     * Метод реализаущий добавление заявки в хранилище
-     * @param item новая заявка
-     */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items.add(item);
+        items.add(item);
         return item;
     }
 
-    /**
-     * Редактирование заявок.
-     * @param id номер заявки.
-     * @param item отредактированная заявка.
-     * @return true - флаг успешного редактирования
-     */
-    public boolean replace(String id, Item item) {
-        boolean replaced = false;
-        for (int i = 0; i < this.items.size(); i++) {
-            if (this.items.get(i).getId().equals(id)) {
-                items.set(i, item);
-                replaced = true;
-                break;
+    public void update(String id, Item item) {
+        if (indexOf(id) != -1) {
+            item.setId(id);
+            items.set(indexOf(id), item);
+        } else {
+            System.out.println("id doesn't exist!");
+        }
+    }
+
+    public void delete(String id) {
+        if (indexOf(id) != 1) {
+            items.remove(indexOf(id));
+        } else {
+            System.out.println("id doesn't exist!");
+        }
+    }
+
+    public ArrayList<Item> findAll() {
+        ArrayList<Item> itemsWithoutNull = new ArrayList<>();
+        for (Item item : items) {
+            if (item != null) {
+                itemsWithoutNull.add(item);
             }
         }
-        return replaced;
+        return itemsWithoutNull;
     }
 
-    /**
-     * Удаление заявок.
-     * @param id номер заявки.
-     * @return флаг успешного удаления.
-     */
-    public boolean delete(String id) {
-        boolean deleted = false;
-        for (int i = 0; i < this.items.size(); i++) {
-            if (this.items.get(i).getId().equals(id)) {
-                this.items.remove(i);
-                deleted = true;
-                break;
+    public ArrayList<Item> findByName(String name) {
+        ArrayList<Item> itemsEqualByName = new ArrayList<>();
+        for (Item item : items) {
+            if (item.getName().equals(name)) {
+                itemsEqualByName.add(item);
             }
         }
-        return deleted;
+        return itemsEqualByName;
     }
 
-    /**
-     * Получение списка всех заявок.
-     * @return массив заявок.
-     */
-    public List<Item> findAll() {
-        return this.items;
-    }
-
-    /**
-     * Получение списка по имени
-     * @param key имя заявки
-     * @return массив заявок.
-     */
-    public List<Item> findByName(String key) {
-        return items.stream().filter(x->x.getName().equals(key)).collect(Collectors.toList());
-    }
-
-    /**
-     * Поулчение заявки по id
-     * @param id номер заявки.
-     * @return найденная заявка.
-     */
     public Item findById(String id) {
-        return items.stream().filter(x->x.getId().equals(id)).findFirst().orElse(null);
+        if (indexOf(id) != -1) {
+            return items.get(indexOf(id));
+        } else {
+            System.out.println("id doesn't exist!");
+            return null;
+        }
     }
 
-    /**
-     * Метод генерирует уникальный ключ для заявки.
-     * Так как у заявки нет уникальности полей, имени и описание. Для идентификации нам нужен уникальный ключ.
-     * @return Уникальный ключ.
-     */
+    private int indexOf(String id) {
+        int rsl = -1;
+        for(int index = 0; index < items.size(); index++) {
+            if (items.get(index).getId().equals(id)) {
+                rsl = index;
+                break;
+            }
+        }
+        return rsl;
+    }
+
     private String generateId() {
-        return "" + LocalDateTime.now() + Math.random();
+        Random random = new Random();
+        return String.valueOf(random.nextLong() + System.currentTimeMillis());
     }
-
 }

@@ -1,7 +1,5 @@
 package ru.job4j.tracker;
 
-import java.util.function.Consumer;
-
 public class ValidateInput implements Input {
 
     private final Input input;
@@ -16,17 +14,22 @@ public class ValidateInput implements Input {
     }
 
     @Override
-    public int askInt(String question, int max, Consumer<String> output) {
+    public int askInt(String question) {
+        return Integer.valueOf(askStr(question));
+    }
+
+    @Override
+    public int askInt(String question, int max) {
         boolean invalid = true;
         int value = -1;
         do {
             try {
-                value = input.askInt(question, max, output);
+                value = input.askInt(question, max);
                 invalid = false;
-            } catch (IllegalStateException moe) {
-                output.accept("Please select key from menu ");
-            } catch (NumberFormatException nfe) {
-                output.accept("Please enter validate data again ");
+            } catch (IllegalStateException e) {
+                System.out.println("Please enter key from menu");
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter validate data");
             }
         } while (invalid);
         return value;
